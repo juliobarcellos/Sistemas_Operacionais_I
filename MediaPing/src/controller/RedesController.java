@@ -4,19 +4,16 @@ import java.io.*;
 import java.util.regex.*;
 
 public class RedesController {
-
-
+	String os = System.getProperty("os.name");
+	
 	public RedesController () {
 		super();
 			}
-	
-	public String os(){
-		String os = System.getProperty("os.name");
-		return os;
-	}
-	
+
 	public void ip() {
-		try {
+		
+		if (os == "WINDOWS"){
+			try {
 			Process processo = Runtime.getRuntime().exec("ipconfig");
 			InputStream fluxo = processo.getInputStream();
 			InputStreamReader leitor = new InputStreamReader(fluxo);
@@ -42,28 +39,88 @@ public class RedesController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		}
+		else if (os.contains("Linux")) {
+			try {
+				Process processo = Runtime.getRuntime().exec("ifconfig");
+				InputStream fluxo = processo.getInputStream();
+				InputStreamReader leitor = new InputStreamReader(fluxo);
+				BufferedReader buffer = new BufferedReader(leitor);
+				String linha = buffer.readLine();
+				String adaptador = "";
+				while (linha != null) {
+					if (linha.contains("flag")) {
+						adaptador = ("Adaptador: "+linha.substring(0, linha.indexOf(":"))+" - ");
+					}
+					else if (linha.contains("inet ")) {
+						String ipv4=("IPv4: "+ExtraiIP(linha));					
+						System.out.println(adaptador+ipv4);
+						adaptador ="";
+					}
+					linha = buffer.readLine();
+				}
+				
+				buffer.close();
+				leitor.close();
+				fluxo.close();
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		else {
+			System.out.println("sistema não reconhecido");
+		}
 	}
 	
 	public void ping () {
-		try {
-			Process processo = Runtime.getRuntime().exec("ping -n 10 www.autocj.co.jp");
-			InputStream fluxo = processo.getInputStream();
-			InputStreamReader leitor = new InputStreamReader(fluxo);
-			BufferedReader buffer = new BufferedReader(leitor);
-			String linha = buffer.readLine();
-			while (linha != null) {
-				if (linha.contains("ximo")) {
-					String mdping = ExtraiPing(linha);
-					System.out.println("M�dia de ping: "+mdping);
-				}
-				linha = buffer.readLine();
-			}			
-			buffer.close();
-			leitor.close();
-			fluxo.close();
+		if (os.contains("Windows")){
 			
-		} catch (IOException e) {
-			e.printStackTrace();
+			try {
+				Process processo = Runtime.getRuntime().exec("ping -n 10 www.autocj.co.jp");
+				InputStream fluxo = processo.getInputStream();
+				InputStreamReader leitor = new InputStreamReader(fluxo);
+				BufferedReader buffer = new BufferedReader(leitor);
+				String linha = buffer.readLine();
+				while (linha != null) {
+					if ((linha.contains("ximo"))||(linha.contains("average"))) {
+						String mdping = ExtraiPing(linha);
+						System.out.println("Média de ping: "+mdping);
+					}
+					linha = buffer.readLine();
+				}			
+				buffer.close();
+				leitor.close();
+				fluxo.close();
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		else if (os.contains("Linux")) {
+			try {
+				Process processo = Runtime.getRuntime().exec("ping -c 10 www.autocj.co.jp");
+				InputStream fluxo = processo.getInputStream();
+				InputStreamReader leitor = new InputStreamReader(fluxo);
+				BufferedReader buffer = new BufferedReader(leitor);
+				String linha = buffer.readLine();
+				while (linha != null) {
+					if (linha.contains("rtt")) {
+						String mdping = ExtraiPing(linha);
+						System.out.println("Média de ping: "+mdping);
+					}
+					linha = buffer.readLine();
+				}			
+				buffer.close();
+				leitor.close();
+				fluxo.close();
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		else {
+			System.out.println("Sistema não encontrado");
 		}
 	}
 	
@@ -88,18 +145,24 @@ public class RedesController {
 public String ExtraiPing (String ping) {
 		
 		String PING_PATTERN = "(age = .*?ms)";
-		String PING_PADRAO = "(dia = .*?ms)";		
-
+		String PING_PADRAO = "(dia = .*?ms)";
+		String LINUX_PATTERN = "[\\d]+\\.[\\d]+\\/[\\d]+\\.[\\d]+";
 		Pattern pattern = Pattern.compile(PING_PATTERN);
 		Pattern padrao = Pattern.compile(PING_PADRAO);
+		Pattern linuxp = Pattern.compile(LINUX_PATTERN);
 		Matcher matcher = pattern.matcher(ping);
 		Matcher combinador = padrao.matcher(ping);
+		Matcher linuxm = linuxp.matcher(ping);
 		if (matcher.find()) {
 		    return matcher.group().substring(6);
 		} else if (combinador.find()) {
 			return combinador.group().substring(6);
+		}else if (linuxm.find()) {
+			return linuxm.group().substring(linuxm.group().indexOf("/")+1).replace(".", ",")+"ms";
 		} else{
 			return "error";
 		}
 	}
+
+
 }

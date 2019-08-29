@@ -10,7 +10,7 @@ public class Main {
 		RedesController rc = new RedesController();
 		int Opc =0;
 		do {
-			Opc=Integer.parseInt(JOptionPane.showInputDialog("Menu Principal\n\n1 - Mostrar IPv4 dos adaptadores\n2 - Média de ping\n9 - Fim"));
+			Opc=Integer.parseInt(JOptionPane.showInputDialog("Menu Principal\n\n1 - Mostrar IPv4 dos adaptadores\n2 - MÃ©dia de ping\n9 - Fim"));
 			switch (Opc) {
 			case 1:
 				rc.ip();
@@ -22,7 +22,7 @@ public class Main {
 				JOptionPane.showMessageDialog(null, "Fim");
 				break;
 			default:
-				JOptionPane.showMessageDialog(null, "Digite uma Opção Válida!");
+				JOptionPane.showMessageDialog(null, "Digite uma OpÃ§Ã£o VÃ¡lida!");
 			}
 		}
 		while (Opc!=9);

@@ -9,7 +9,7 @@ public class Principal {
 		//String os = pc.os();
 		//System.out.println(os);
 		
-		String processo="notepad.exe";
+		//String processo="notepad.exe";
 		//Se quiser posso colocar o caminho completo de uma aplicação no processo que também resolve (ex: C://Programfiles/avast/avast.exe)
 		//Se eu tentar chamar algum processo que precise de direitos de administrador (regedit.exe por ex), vai dar erro 740. 
 		//pc.chamaProcesso(processo);

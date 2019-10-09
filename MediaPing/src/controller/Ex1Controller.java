@@ -3,10 +3,10 @@ package controller;
 import java.io.*;
 import java.util.regex.*;
 
-public class RedesController {
+public class Ex1Controller {
 	String os = System.getProperty("os.name");
 	
-	public RedesController () {
+	public Ex1Controller () {
 		super();
 			}
 

@@ -2,12 +2,12 @@ package view;
 
 import javax.swing.JOptionPane;
 
-import controller.RedesController;
+import controller.Ex1Controller;
 
-public class Main {
+public class MainEx1 {
 
 	public static void main(String[] args) {
-		RedesController rc = new RedesController();
+		Ex1Controller rc = new Ex1Controller();
 		int Opc =0;
 		do {
 			Opc=Integer.parseInt(JOptionPane.showInputDialog("Menu Principal\n\n1 - Mostrar IPv4 dos adaptadores\n2 - Média de ping\n9 - Fim"));

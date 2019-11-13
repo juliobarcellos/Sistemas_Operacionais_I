@@ -4,7 +4,6 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
 import controller.Ex3CancelaController;
 import controller.Ex3OkController;
 import controller.Ex3ProcuraController;
@@ -20,6 +19,8 @@ import java.awt.event.ActionEvent;
 
 public class MainEx3 extends JFrame {
 
+	private static final long serialVersionUID = 1L;
+	
 	private JPanel tela;
 	private JTextField tfcaminho;
 	private JButton btnProcurar;

@@ -12,7 +12,7 @@ public class Ex1Controller {
 
 	public void ip() {
 		
-		if (os == "WINDOWS"){
+		if (os.contains("Win")){
 			try {
 			Process processo = Runtime.getRuntime().exec("ipconfig");
 			InputStream fluxo = processo.getInputStream();
@@ -69,12 +69,12 @@ public class Ex1Controller {
 			}
 		}
 		else {
-			System.out.println("sistema n√£o reconhecido");
+			System.out.println("sistema n„o reconhecido");
 		}
 	}
 	
 	public void ping () {
-		if (os.contains("Windows")){
+		if (os.contains("Win")){
 			
 			try {
 				Process processo = Runtime.getRuntime().exec("ping -n 10 www.autocj.co.jp");
@@ -120,7 +120,7 @@ public class Ex1Controller {
 			}
 		}
 		else {
-			System.out.println("Sistema n√£o encontrado");
+			System.out.println("Sistema n„o encontrado");
 		}
 	}
 	

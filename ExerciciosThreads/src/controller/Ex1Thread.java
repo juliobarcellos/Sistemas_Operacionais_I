@@ -3,8 +3,8 @@ package controller;
 public class Ex1Thread extends Thread{
 	private int n;
 	
-	public Ex1Thread(int n) {
-		this.n=n;
+	public Ex1Thread() {
+		this.n = (int) this.getId();
 	}
 	
 	@Override
@@ -13,6 +13,6 @@ public class Ex1Thread extends Thread{
 	}
 	
 	public void Mostrar() {
-		System.out.println("Thread nº "+n+" rodando");
+		System.out.println("Thread nÂº "+n+" rodando");
 	}
 }

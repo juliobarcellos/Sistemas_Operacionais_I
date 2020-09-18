@@ -16,7 +16,8 @@ public class ProcController {
 		return os;
 		/*
 		 * os.arch traz a arquitetura
-		 * se o java n„o estiver atualizado, pode ser que ocorra um erro no nome do SO, por ex windows vers„o nao encontrada
+		 * se o java n√£o estiver atualizado, pode ser que ocorra um erro no nome do SO
+		 * por ex: windows vers√£o n√£o encontrada
 		*/
 	}
 	

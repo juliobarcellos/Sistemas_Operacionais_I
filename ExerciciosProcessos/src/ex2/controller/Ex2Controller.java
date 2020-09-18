@@ -35,7 +35,24 @@ public class Ex2Controller {
 				e.printStackTrace();
 			}
 		} else if (os.contains("Linux")) {
+			try {
+				Process processo = Runtime.getRuntime().exec("ps -ef");
+				InputStream fluxo = processo.getInputStream();
+				InputStreamReader leitor = new InputStreamReader(fluxo);
+				BufferedReader buffer = new BufferedReader(leitor);
+				String linha = buffer.readLine();
+				while (linha != null) {
+					System.out.println(linha);
+					linha = buffer.readLine();
+				}
 
+				buffer.close();
+				leitor.close();
+				fluxo.close();
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		} else {
 			System.out.println("sistema não reconhecido");
 		}
@@ -52,7 +69,14 @@ public class Ex2Controller {
 				e.printStackTrace();
 			}
 		} else if (os.contains("Linux")) {
-
+			StringBuffer buffer = new StringBuffer();
+			buffer.append("kill ");
+			buffer.append(processo);
+			try {
+				Runtime.getRuntime().exec(buffer.toString());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		} else {
 			System.out.println("Sistema não encontrado");
 		}
@@ -69,7 +93,14 @@ public class Ex2Controller {
 				e.printStackTrace();
 			}
 		} else if (os.contains("Linux")) {
-
+			StringBuffer buffer = new StringBuffer();
+			buffer.append("killall ");
+			buffer.append(pid);
+			try {
+				Runtime.getRuntime().exec(buffer.toString());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		} else {
 			System.out.println("Sistema não encontrado");
 		}

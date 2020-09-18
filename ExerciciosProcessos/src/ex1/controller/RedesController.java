@@ -118,18 +118,24 @@ public class RedesController {
 		}
 	}
 
-	public String ExtraiIP(String IP) {
+	public String ExtraiIP(String linhaIp) {
 
 		String IPADDRESS_PATTERN = "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." + "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\."
 				+ "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." + "([01]?\\d\\d?|2[0-4]\\d|25[0-5])$";
-
-		Pattern pattern = Pattern.compile(IPADDRESS_PATTERN);
-		Matcher matcher = pattern.matcher(IP);
-		if (matcher.find()) {
-			return matcher.group();
-		} else {
-			return "error";
+		String ip = "";
+		if (os.contains("Win")) {
+			Pattern pattern = Pattern.compile(IPADDRESS_PATTERN);
+			Matcher matcher = pattern.matcher(linhaIp);
+			if (matcher.find()) {
+				ip = matcher.group();
+			} else {
+				ip = "error";
+			}
+		} else if (os.contains("Linux")) {
+			ip = linhaIp.substring(13, linhaIp.indexOf("netmask"));
 		}
+		
+		return ip;
 	}
 
 	public String ExtraiPing(String ping) {

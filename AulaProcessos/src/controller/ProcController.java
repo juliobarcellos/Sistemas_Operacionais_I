@@ -6,13 +6,13 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 public class ProcController {
-	
+
 	public ProcController() {
 		super();
 	}
-	
-	//inicia um processo no sistema
-	public void chamaProcesso (String processo) {
+
+	// inicia um processo no sistema
+	public void chamaProcesso(String processo) {
 		try {
 			Runtime.getRuntime().exec(processo);
 		} catch (IOException e) {
@@ -26,15 +26,14 @@ public class ProcController {
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
-			}
-			else {
-			e.printStackTrace(); 
+			} else {
+				e.printStackTrace();
 			}
 		}
 	}
-	
-	//faz a leitura de um processo incluindo o texto no console
-	public void leProcesso (String Nomeprocesso) {
+
+	// faz a leitura de um processo incluindo o texto no console
+	public void leProcesso(String Nomeprocesso) {
 		try {
 			Process processo = Runtime.getRuntime().exec(Nomeprocesso);
 			InputStream fluxo = processo.getInputStream();
@@ -48,21 +47,21 @@ public class ProcController {
 			buffer.close();
 			leitor.close();
 			fluxo.close();
-			
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	
-	//finaliza um processo
-	public void MataProcesso (String Parametro) {
+
+	// finaliza um processo
+	public void MataProcesso(String Parametro) {
 		String cmdPid = "TASKKILL /PID ";
 		String cmdNome = "TASKKILL /IM ";
 		int pid = 0;
 		StringBuffer buffer = new StringBuffer();
-		
-		try{
-			pid= Integer.parseInt(Parametro);
+
+		try {
+			pid = Integer.parseInt(Parametro);
 			buffer.append(cmdPid);
 			buffer.append(pid);
 		} catch (NumberFormatException e) {

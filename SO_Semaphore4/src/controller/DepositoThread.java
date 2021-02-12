@@ -14,7 +14,7 @@ public class DepositoThread extends Thread {
 		this.valorTransacao = valorTransacao;
 		this.limitacao = limitacao;
 	}
-	
+
 	@Override
 	public void run() {
 		try {
@@ -22,16 +22,16 @@ public class DepositoThread extends Thread {
 			creditar();
 			sleep(2000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			limitacao.release();
 		}
-		limitacao.release();
 	}
-	
+
 	public void creditar() {
-		System.out.print("Saldo Anterior: R$ " + saldoConta);
+		System.out.format("Conta %d - Saldo Anterior: R$ %.2f Deposito no valor de: R$ %.2f Novo saldo: R$ %.2f%n",
+				idConta, saldoConta, valorTransacao, saldoConta + valorTransacao);
 		this.saldoConta += valorTransacao;
-		System.out.println("Conta: "+idConta+". Deposito no valor de: R$ " +valorTransacao + " Novo saldo: R$" + saldoConta);
 	}
 
 }

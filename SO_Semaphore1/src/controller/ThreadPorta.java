@@ -3,18 +3,18 @@ package controller;
 import java.util.concurrent.Semaphore;
 import java.util.Random;
 
-public class ThreadPorta extends Thread{
-	
+public class ThreadPorta extends Thread {
+
 	private int idPessoa;
 	private static int posSaida;
 	private Semaphore semaforo;
 	Random r = new Random();
-	
-	public ThreadPorta (int idPessoa, Semaphore semaforo) {
-		this.idPessoa=idPessoa;
+
+	public ThreadPorta(int idPessoa, Semaphore semaforo) {
+		this.idPessoa = idPessoa;
 		this.semaforo = semaforo;
 	}
-	
+
 	@Override
 	public void run() {
 		PessoaAndando();
@@ -28,39 +28,39 @@ public class ThreadPorta extends Thread{
 		}
 		PessoaCruzando();
 	}
-	
-	private void PessoaAndando() { 
+
+	private void PessoaAndando() {
 		int tempo = 1000;
 		int distanciaPercorrida = 0;
-		
-		while (distanciaPercorrida<200) {
-			distanciaPercorrida += (int) ((Math.random()*3)+4);
+
+		while (distanciaPercorrida < 200) {
+			distanciaPercorrida += (int) ((Math.random() * 3) + 4);
 			try {
 				Thread.sleep(tempo);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			System.out.println("A Pessoa "+idPessoa+" já andou "+distanciaPercorrida+" metros");
+			System.out.println("A Pessoa " + idPessoa + " já andou " + distanciaPercorrida + " metros");
 		}
 	}
-	
-	private void PessoaNaPorta () {
-		System.out.println("A Pessoa "+idPessoa+" chegou na porta");
+
+	private void PessoaNaPorta() {
+		System.out.println("A Pessoa " + idPessoa + " chegou na porta");
 		double tempoInicial = System.nanoTime();
-		int tempoParado = (r.nextInt(3-1)+1)*1000;
+		int tempoParado = (r.nextInt(3 - 1) + 1) * 1000;
 		try {
 			Thread.sleep(tempoParado);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 		double tempoFinal = System.nanoTime();
-		double tempototal = tempoFinal-tempoInicial;
+		double tempototal = tempoFinal - tempoInicial;
 		tempototal = tempototal / Math.pow(10, 9);
-		System.out.println("Pessoa" +idPessoa+" Tempo parado: "+tempototal);
+		System.out.println("Pessoa" + idPessoa + " Tempo parado: " + tempototal);
 	}
-	
-	private void PessoaCruzando () {
+
+	private void PessoaCruzando() {
 		posSaida++;
-		System.out.println("A pessoa "+idPessoa+" foi a "+posSaida+"ª. a cruzar a porta");
+		System.out.println("A pessoa " + idPessoa + " foi a " + posSaida + "ª. a cruzar a porta");
 	}
 }

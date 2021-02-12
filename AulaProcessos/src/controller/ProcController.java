@@ -11,16 +11,7 @@ public class ProcController {
 		super();
 	}
 	
-	public String os(){
-		String os = System.getProperty("os.name");
-		return os;
-		/*
-		 * os.arch traz a arquitetura
-		 * se o java não estiver atualizado, pode ser que ocorra um erro no nome do SO
-		 * por ex: windows versão não encontrada
-		*/
-	}
-	
+	//inicia um processo no sistema
 	public void chamaProcesso (String processo) {
 		try {
 			Runtime.getRuntime().exec(processo);
@@ -42,6 +33,7 @@ public class ProcController {
 		}
 	}
 	
+	//faz a leitura de um processo incluindo o texto no console
 	public void leProcesso (String Nomeprocesso) {
 		try {
 			Process processo = Runtime.getRuntime().exec(Nomeprocesso);
@@ -62,6 +54,7 @@ public class ProcController {
 		}
 	}
 	
+	//finaliza um processo
 	public void MataProcesso (String Parametro) {
 		String cmdPid = "TASKKILL /PID ";
 		String cmdNome = "TASKKILL /IM ";

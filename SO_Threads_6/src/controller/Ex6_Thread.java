@@ -11,7 +11,7 @@ public class Ex6_Thread extends Thread {
 	public Ex6_Thread(JTextField num, JButton btnJogar) {
 		this.num = num;
 		this.btnJogar = btnJogar;
-		this.threadsFinalizadas = 0;
+		threadsFinalizadas = 0;
 	}
 
 	@Override

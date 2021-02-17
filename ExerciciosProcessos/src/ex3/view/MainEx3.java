@@ -50,7 +50,7 @@ public class MainEx3 extends JFrame {
 	 * Create the frame.
 	 */
 	public MainEx3() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\julio\\git\\Sistemas_Operacionais_I\\MediaPing\\Run-Dialog.png").getScaledInstance(10, 10, Image.SCALE_SMOOTH));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(".\\Run-Dialog.png").getScaledInstance(10, 10, Image.SCALE_SMOOTH));
 		setTitle("Executar");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 414, 211);
@@ -93,7 +93,7 @@ public class MainEx3 extends JFrame {
 		tela.add(lblAbrir);
 		
 		JLabel lblNewLabel = new JLabel("<html>Digite o nome de um programa, pasta, documento ou <br/> recurso da Internet e o Windows o abrir\u00E1 para voc\u00EA.");
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\julio\\git\\Sistemas_Operacionais_I\\MediaPing\\Run-Dialog3.png"));
+		lblNewLabel.setIcon(new ImageIcon(".\\Run-Dialog3.png"));
 		lblNewLabel.setBounds(12, 2, 364, 72);
 		tela.add(lblNewLabel);
 		
